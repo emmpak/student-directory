@@ -27,12 +27,21 @@ def print(students)
   end
 end
 
+def print_students_with_letter(students)
+  puts "What letter does the name of the student start with?"
+  letter = gets.chomp.capitalize
+  puts "Here are the students starting with '#{letter}':"
+  # using the filtered array as an argument for the print function
+  print(students.select { |student| student[:name].start_with? letter})
+end
+
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
 
 students = input_students
 # nothing happens until we call the methods
-print_header
-print(students)
-print_footer(students)
+# print_header
+# print(students)
+# print_footer(students)
+print_students_with_letter(students)
