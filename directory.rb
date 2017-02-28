@@ -22,8 +22,10 @@ def print_header
 end
 
 def print(students)
-  students.each_with_index do |student, index|
-    puts "#{index + 1}.#{student[:name]} (#{student[:cohort]} cohort)"
+  count = 0
+  while count < students.length
+    puts "#{students[count][:name]} (#{students[count][:cohort]} cohort)"
+    count += 1
   end
 end
 
@@ -45,8 +47,8 @@ end
 
 students = input_students
 # nothing happens until we call the methods
-# print_header
-# print(students)
-# print_footer(students)
+ print_header
+ print(students)
+ print_footer(students)
 # print_students_with_letter(students)
-print_students_upto_n_characters(students, 12)
+# print_students_upto_n_characters(students, 12)
