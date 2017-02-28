@@ -35,6 +35,10 @@ def print_students_with_letter(students)
   print(students.select { |student| student[:name].start_with? letter})
 end
 
+def print_students_upto_n_characters(students, n)
+  print(students.select { |student| student[:name].length < 12})
+end
+
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
@@ -44,4 +48,5 @@ students = input_students
 # print_header
 # print(students)
 # print_footer(students)
-print_students_with_letter(students)
+# print_students_with_letter(students)
+print_students_upto_n_characters(students, 12)
