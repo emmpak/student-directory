@@ -41,6 +41,30 @@ def print_students_upto_n_characters(students, n)
   print(students.select { |student| student[:name].length < 12})
 end
 
+def add_categories(students)
+  puts "What additional information would you like to enter for each student?"
+  # create an empty array to store the categories entered by user
+  categories = []
+  # get the first catergory and keep adding values to the array until user hits enter twice
+  while true
+    category = gets.chomp
+    break if category.empty?
+    categories << category
+  end
+  # iterate over each student
+  students.each do |student|
+    puts "Name: #{student[:name]}"
+    #iterate over the categories and ask the user for input
+    categories.each do |category|
+      puts category
+      input = gets.chomp
+      # add the category to the hash
+      student[category] = input if !input.empty?
+    end
+  end
+  puts students
+end
+
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
@@ -52,3 +76,4 @@ students = input_students
  print_footer(students)
 # print_students_with_letter(students)
 # print_students_upto_n_characters(students, 12)
+ add_categories(students)
