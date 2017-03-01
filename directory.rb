@@ -83,11 +83,24 @@ def print_footer(students)
   puts "Overall, we have #{students.count} great students".center(150)
 end
 
+def print_students_per_cohort(students)
+  cohorts = students.map { |student| student[:cohort].to_s}.uniq
+  months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Novermber", "December"]
+  cohorts = cohorts.sort_by { |x| months.index(x)}
+  cohorts.each do |cohort|
+    puts "The following students are enrolled in #{cohort}"
+    students_month = students.select {|student| student[:cohort].to_s == cohort}
+    students_month.each { |student| puts student[:name]}
+  end
+end
+
 students = input_students
 # nothing happens until we call the methods
  print_header
- print(students) { |line| puts line.center(150)}
- print_footer(students)
+# print(students) { |line| puts line.center(150)}
 # print_students_with_letter(students)
 # print_students_upto_n_characters(students, 12)
 # add_categories(students)
+### print(print_cohort(students))
+print_students_per_cohort(students)
+print_footer(students)
