@@ -4,18 +4,18 @@ def input_students
   # create an empty array
   students = []
   # get the first name
-  name = gets.chomp
+  name = gets.chop
   # while the name is not empty, repeat this code
   while !name.empty? do
     puts "Is #{name} the right name? (Y/N)"
-    answer = gets.chomp
+    answer = gets.chop
     if /[nN]/.match(answer)
       puts "Please enter the correct name:"
-      name = gets.chomp
+      name = gets.chop
       break if name.empty?
     end
     puts "What cohort is he/she part of?"
-    cohort = gets.chomp
+    cohort = gets.chop
     if cohort.empty?
       cohort = :March
       puts "Enrolling the student to the March cohort."
@@ -24,7 +24,7 @@ def input_students
     puts "Now we have #{students.count} student" if students.count == 1
     puts "Now we have #{students.count} students" if students.count > 1
     # get another name from the user
-    name = gets.chomp
+    name = gets.chop
   end
   # return the array of students
   students
@@ -46,7 +46,7 @@ end
 
 def print_students_with_letter(students)
   puts "What letter does the name of the student start with?"
-  letter = gets.chomp.capitalize
+  letter = gets.chop.capitalize
   puts "Here are the students starting with '#{letter}':"
   # using the filtered array as an argument for the print function
   print(students.select { |student| student[:name].start_with? letter})
@@ -62,7 +62,7 @@ def add_categories(students)
   categories = []
   # get the first catergory and keep adding values to the array until user hits enter twice
   while true
-    category = gets.chomp
+    category = gets.chop
     break if category.empty?
     categories << category
   end
@@ -72,7 +72,7 @@ def add_categories(students)
     #iterate over the categories and ask the user for input
     categories.each do |category|
       puts category
-      input = gets.chomp
+      input = gets.chop
       # add the category to the hash
       student[category.to_sym] = input if !input.empty?
     end
