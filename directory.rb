@@ -7,7 +7,20 @@ def input_students
   name = gets.chomp
   # while the name is not empty, repeat this code
   while !name.empty? do
-    students << {name: name, cohort: :november}
+    puts "Is #{name} the right name? (Y/N)"
+    answer = gets.chomp
+    if /[nN]/.match(answer)
+      puts "Please enter the correct name:"
+      name = gets.chomp
+      break if name.empty?
+    end
+    puts "What cohort is he/she part of?"
+    cohort = gets.chomp
+    if cohort.empty?
+      cohort = :March
+      puts "Enrolling the student to the March cohort."
+    end
+    students << {name: name, cohort: cohort.to_sym}
     puts "Now we have #{students.count} students"
     # get another name from the user
     name = gets.chomp
@@ -60,7 +73,7 @@ def add_categories(students)
       puts category
       input = gets.chomp
       # add the category to the hash
-      student[category] = input if !input.empty?
+      student[category.to_sym] = input if !input.empty?
     end
   end
   puts students
@@ -73,7 +86,7 @@ end
 students = input_students
 # nothing happens until we call the methods
  print_header
- print(students) #{ |line| puts line.center(150)}
+ print(students) { |line| puts line.center(150)}
  print_footer(students)
 # print_students_with_letter(students)
 # print_students_upto_n_characters(students, 12)
