@@ -17,14 +17,15 @@ def input_students
 end
 
 def print_header
-  puts "The students of Villains Academy"
-  puts "______________"
+  puts "The students of Villains Academy".center(150)
+  puts "--------------".center(150)
 end
 
 def print(students)
   count = 0
   while count < students.length
-    puts "#{students[count][:name]} (#{students[count][:cohort]} cohort)"
+    line = "#{students[count][:name]} (#{students[count][:cohort]} cohort)".center(150)
+    block_given? ? (yield line) : (puts line)
     count += 1
   end
 end
@@ -66,14 +67,14 @@ def add_categories(students)
 end
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
+  puts "Overall, we have #{students.count} great students".center(150)
 end
 
 students = input_students
 # nothing happens until we call the methods
  print_header
- print(students)
+ print(students) #{ |line| puts line.center(150)}
  print_footer(students)
 # print_students_with_letter(students)
 # print_students_upto_n_characters(students, 12)
- add_categories(students)
+# add_categories(students)
