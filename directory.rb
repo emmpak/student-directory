@@ -21,7 +21,8 @@ def input_students
       puts "Enrolling the student to the March cohort."
     end
     students << {name: name, cohort: cohort.to_sym}
-    puts "Now we have #{students.count} students"
+    puts "Now we have #{students.count} student" if students.count == 1
+    puts "Now we have #{students.count} students" if students.count > 1
     # get another name from the user
     name = gets.chomp
   end
@@ -97,10 +98,10 @@ end
 students = input_students
 # nothing happens until we call the methods
  print_header
-# print(students) { |line| puts line.center(150)}
+ print(students) { |line| puts line.center(150)}
 # print_students_with_letter(students)
 # print_students_upto_n_characters(students, 12)
 # add_categories(students)
 ### print(print_cohort(students))
-print_students_per_cohort(students)
+# rint_students_per_cohort(students)
 print_footer(students)
