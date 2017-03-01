@@ -5,6 +5,7 @@ def input_students
   students = []
   # get the first name
   name = gets.chop
+  abort "No students entered" if name.empty?
   # while the name is not empty, repeat this code
   while !name.empty? do
     puts "Is #{name} the right name? (Y/N)"
