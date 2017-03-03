@@ -76,9 +76,7 @@ def save_students
   puts "What file would you like to save the students to?"
   filename = STDIN.gets.chomp
   # open the file for writing
-  file = File.open(filename, 'w')
-  saving_to(file)
-  file.close
+  File.open(filename, 'w') { |f| saving_to(f)}
 end
 
 def saving_to(file)
@@ -94,9 +92,7 @@ def load_students(filename = "")
     puts "Please enter the name of the file where the student data is stored:"
     filename = STDIN.gets.chomp
   end
-  file = File.open(filename, 'r')
-  loading_from(file)
-  file.close
+  File.open(filename, 'r') { |f| loading_from(f)}
 end
 
 def loading_from(file)
