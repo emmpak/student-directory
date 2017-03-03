@@ -40,14 +40,15 @@ end
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit enter twice"
-  # get the first name
-  name = STDIN.gets.chomp
-  # while the name is not empty, repeat this code
-  while !name.empty? do
+  get_and_add_student
+end
+
+def get_and_add_student
+  while true do
+    name = STDIN.gets.chomp
+    break if name.empty?
     add_student(name)
     puts "Now we have #{@students.count} students"
-    # get another name from the user
-    name = STDIN.gets.chomp
   end
 end
 
@@ -73,22 +74,29 @@ end
 def save_students
   # open the file for writing
   file = File.open("students.csv", 'w')
-  # iterate over the array of students
+  saving_to(file)
+  file.close
+end
+
+def saving_to(file)
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
     file.puts csv_line
   end
-  file.close
 end
 
 def load_students(filename = "students.csv")
   file = File.open(filename, 'r')
+  loading_from(file)
+  file.close
+end
+
+def loading_from(file)
   file.readlines.each do |line|
     name, cohort = line.chomp.split(",")
     add_student(name, cohort.to_sym)
   end
-  file.close
 end
 
 def try_load_students
