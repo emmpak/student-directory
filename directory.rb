@@ -1,3 +1,5 @@
+require 'csv'
+
 @students = [] # an empty array accessible to all methods
 def interactive_menu
   loop do
@@ -9,8 +11,8 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
+  puts "3. Save the list to a file"
+  puts "4. Load the list from a file"
   puts "9. Exit"
 end
 
@@ -75,15 +77,12 @@ end
 def save_students
   puts "What file would you like to save the students to?"
   filename = STDIN.gets.chomp
-  # open the file for writing
-  File.open(filename, 'w') { |f| saving_to(f)}
+  CSV.open(filename, 'wb') { |csv| saving_to(csv)}
 end
 
-def saving_to(file)
+def saving_to(csv)
   @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+    csv << [student[:name], student[:cohort]]
   end
 end
 
@@ -92,12 +91,12 @@ def load_students(filename = "")
     puts "Please enter the name of the file where the student data is stored:"
     filename = STDIN.gets.chomp
   end
-  File.open(filename, 'r') { |f| loading_from(f)}
+  CSV.open(filename, 'r') { |csv| loading_from(csv)}
 end
 
-def loading_from(file)
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(",")
+def loading_from(csv)
+  csv.each do |row|
+    name, cohort = row
     add_student(name, cohort.to_sym)
   end
 end
