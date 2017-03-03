@@ -73,8 +73,10 @@ def print_footer
 end
 
 def save_students
+  puts "What file would you like to save the students to?"
+  filename = STDIN.gets.chomp
   # open the file for writing
-  file = File.open("students.csv", 'w')
+  file = File.open(filename, 'w')
   saving_to(file)
   file.close
 end
@@ -87,7 +89,11 @@ def saving_to(file)
   end
 end
 
-def load_students(filename = "students.csv")
+def load_students(filename = "")
+  if filename.empty?
+    puts "Please enter the name of the file where the student data is stored:"
+    filename = STDIN.gets.chomp
+  end
   file = File.open(filename, 'r')
   loading_from(file)
   file.close
@@ -101,8 +107,8 @@ def loading_from(file)
 end
 
 def try_load_students
-  filename = ARGV.first.nil? ? "students.csv" : ARGV.first # first argument from the command line
-  # return if filename.nil? # get out of the method if it isn't given
+  filename = ARGV.first # first argument from the command line
+  return if filename.nil? # get out of the method if it isn't given
   if File.exist?(filename) # if it exists
     load_students(filename)
     puts "Loaded #{@students.count} from #{filename}"
